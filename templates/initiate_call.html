@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Initiate Call</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesss.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style23.css') }}">
+</head>
+<body>
+
+<!-- Notification Container -->
+<div id="notificationContainer"></div>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo" class="logo">
+            <h2>AdminPro</h2>
+        </div>
+        <ul class="nav-links">
+            <li data-page="admin_dashboard">
+                <a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+            <li data-page="Area">
+                <a href="{{ url_for('manage_areas') }}"><i class="fas fa-map-marker-alt"></i> Area</a>
+            </li>
+            <li data-page="Contacts">
+                <a href="{{ url_for('manage_contacts') }}"><i class="fas fa-users"></i> Contacts</a>
+            </li>
+            <li class="active" data-page="Initiate call">
+                <a href="{{ url_for('initiate_call') }}"><i class="fas fa-phone"></i> Initiate Call</a>
+            </li>
+            <li data-page="Call Logs">
+                <a href="{{ url_for('call_logs') }}"><i class="fas fa-chart-line"></i> Call Logs</a>
+            </li>
+            <li data-page="report">
+                <a href="{{ url_for('report') }}"><i class="fas fa-file-alt"></i> Report</a>
+            </li>
+            <li data-page="feedback">
+                <a href="{{ url_for('feedback') }}"><i class="fas fa-comment-dots"></i> Feedback</a>
+            </li>
+        </ul>
+    </nav>
+ {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="alert-container">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container mt-5">
+            <h1 class="mb-4">Initiate Call</h1>
+            <form method="POST" action="{{ url_for('initiate_call') }}">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.area_id.label(class="form-control-label") }}
+                    {{ form.area_id(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-lg btn-block">
+                        <i class="fas fa-phone-alt"></i> Initiate Call
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+<!-- Optional JS for notifications -->
+<script>
+    function showNotification(message, type = 'success') {
+        const container = document.getElementById("notificationContainer");
+        container.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`;
+        setTimeout(() => container.innerHTML = '', 4000);
+    }
+</script>
+
+<!-- Optional Bootstrap JS if alerts/dismissible used -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

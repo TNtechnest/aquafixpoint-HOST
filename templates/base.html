@@ -1,0 +1,17 @@
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <img src="https://via.placeholder.com/50" alt="Logo" class="logo">
+        <h2>AdminPro</h2>
+    </div>
+    <ul class="nav-links">
+        <li class="active" data-page="admin_dashboard"><a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-home"></i>Dashboard</a></li>
+        <li data-page="analytics"><a href="{{ url_for('call_logs') }}"><i class="fas fa-chart-line"></i>Analytics</a></li>
+        <li data-page="sales"><a href="#sales"><i class="fas fa-shopping-cart"></i>Sales</a></li>
+        <li data-page="customers"><a href="#customers"><i class="fas fa-users"></i>Customers</a></li>
+        <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventory</a></li>
+        <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Settings</a></li>
+        <li data-page="Complaints"><a href="{{ url_for('complaints') }}"><i class="fas fa-exclamation-circle"></i>Complaints</a></li>
+
+    </ul>
+</nav>
+

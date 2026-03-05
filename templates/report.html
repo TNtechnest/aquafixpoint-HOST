@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Call Report</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style23.css') }}">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <img src="https://via.placeholder.com/50" alt="Logo" class="logo">
+        <h2>AdminPro</h2>
+    </div>
+    <ul class="nav-links">
+        <li  data-page="admin_dashboard"><a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-home"></i>Dashboard</a></li>
+       <li data-page="Area"><a href="{{ url_for('manage_areas') }}"><i class="fas fa-shopping-cart"></i>Area</a></li>
+        <li data-page="Contacts"><a href="{{ url_for('manage_contacts') }}"><i class="fas fa-users"></i>Contacts</a></li>
+        <li data-page="Initiate call"><a href="{{ url_for('initiate_call') }}"><i class="fas fa-cog"></i>Initiate call</a></li>
+        <li   data-page="Call Logs"><a href="{{ url_for('call_logs') }}"><i class="fas fa-chart-line"></i>Call Logs</a></li>
+        <li class="active" data-page="report"><a href="{{ url_for('report') }}"><i class="fas fa-box"></i>Report</a></li>
+        <li data-page="feedback"><a href="{{ url_for('feedback') }}"><i class="fas fa-box"></i>Feedback</a></li>
+    </ul>
+</nav>
+
+
+<main class="main-content">
+<div class="data-tables">
+    <div class="table-card glow">
+    <div class="container mt-5">
+
+
+        <h1 class="mb-4">Call Report</h1>
+
+       <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Contact Name</th>
+            <th>Area Name</th>
+            <th>Other Columns...</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in call_logs %}
+        <tr>
+            <td>{{ log.id }}</td>
+            <td>{{ log.contact.name }}</td>
+            <td>{{ log.contact.area.name if log.contact.area else 'N/A' }}</td>  <!-- Access area through contact -->
+            <td>Other values...</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    </div>
+                    </div>
+</div>
+ </main>
+</div>
+</div>
+</body>
+</html>

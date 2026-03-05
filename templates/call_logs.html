@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Call Logs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style23.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+<div id="notificationContainer"></div>
+    <div class="dashboard">
+       <nav class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo" class="logo">
+            <h2>AdminPro</h2>
+        </div>
+        <ul class="nav-links">
+            <li data-page="admin_dashboard"><a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-home"></i>Dashboard</a></li>
+            <li data-page="Area"><a href="{{ url_for('manage_areas') }}"><i class="fas fa-shopping-cart"></i>Area</a></li>
+            <li data-page="Contacts"><a href="{{ url_for('manage_contacts') }}"><i class="fas fa-users"></i>Contacts</a></li>
+            <li data-page="Initiate call"><a href="{{ url_for('initiate_call') }}"><i class="fas fa-cog"></i>Initiate call</a></li>
+            <li class="active" data-page="Call Logs"><a href="{{ url_for('call_logs') }}"><i class="fas fa-chart-line"></i>Call Logs</a></li>
+            <li data-page="report"><a href="{{ url_for('report') }}"><i class="fas fa-box"></i>Report</a></li>
+            <li data-page="feedback"><a href="{{ url_for('feedback') }}"><i class="fas fa-box"></i>Feedback</a></li>
+        </ul>
+    </nav>
+   
+
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Call Logs</h1>
+
+        <!-- Clear Call Logs Button -->
+        <form method="POST" action="{{ url_for('clear_call_logs') }}" style="display:inline;">
+            <button type="submit" class="btn btn-danger mb-3">Clear Call Logs</button>
+        </form>
+
+        <!-- Check if there are any call logs -->
+        {% if call_logs %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Timestamp</th>
+                        <th>Status</th>
+                        <th>Area</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through each call log -->
+                    {% for log in call_logs %}
+                        <tr>
+                            <td>{{ log.id }}</td>
+                            <td>{{ log.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ log.status }}</td>
+                            <td>{{ areas[log.area_id] if log.area_id in areas else 'Unknown' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No call logs available.</p>
+        {% endif %}
+    </div>
+     </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<div class="table-card glow">
+                        <h3>Top Selling Products</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Sold</th>
+                                    <th>Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topProductsBody"></tbody>
+                        </table>
